@@ -7,5 +7,8 @@ class SmzdmSpider(scrapy.Spider):
 
     def parse(self,response):
         filename = "ps4.txt"
-        with open(filename,"wb") as f:
-            f.write(response.body)
+        with open(filename,"ab") as f:
+            for sel in response.xpath('//ul/li'):
+                link = sel.xpath('a/@href').extract()
+                #f.write(link)
+                print link
